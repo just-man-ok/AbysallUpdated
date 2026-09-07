@@ -1,4 +1,4 @@
-# Abysall Hub is a free, open-sourced script hub I made because scripting is fun.
+# Abysall Hub / Abysall Hub Updated is a free, open-sourced script hub I made because scripting is fun.
 If you want to try it for yourself:
 
 1. in-game (not in the lobby, NO AUTO INJECT SCRIPT)
