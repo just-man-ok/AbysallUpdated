@@ -1097,7 +1097,7 @@ Functions.GetRandomCode = function()
 end
 
 local Window = Library:CreateWindow({
-	Title = "Abysall Hub",
+	Title = "Abysall Hub Fork",
 	Footer = "dsc.gg/abysallhub",
 	NotifySide = "Right",
 	ShowCustomCursor = false,
