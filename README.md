@@ -8,7 +8,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUp
 
 2. in-game OR in-lobby (AUTO INJECT SCRIPT) (You can run the script in the lobby or in-game, and it will execute every single time you enter other sub-floors / lobbies!)
 ```
-loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main_autoinject_from_game.luau)"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main_autoinject.luau)"))()
 ```
 
 Author: bocaj111004
