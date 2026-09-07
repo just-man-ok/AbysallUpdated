@@ -67,6 +67,6 @@ return function(Window)
     local Community = InfoTab:AddLeftGroupbox("Community")
     Community:AddButton("Copy Discord Invite", function()
 	    toclipboard("https://dsc.gg/abysallhub")
-	    Library:Notify("Discord invite copied.")
+	    Library:Notify("Original Abysall Hub Discord invite copied. (not fork)")
     end)
 end
