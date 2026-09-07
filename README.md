@@ -5,6 +5,10 @@ If you want to try it for yourself:
 ```
 loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()
 ```
-Feel free to use any of the source code for your own projects, but credit would be appreciated.
+
+2. in-game OR in-lobby (AUTO INJECT SCRIPT) (You can run the script in the lobby or in-game, and it will execute every single time you enter other sub-floors / lobbies!)
+```
+loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main_autoinject_from_game.luau)"))()
+```
 
 Author: bocaj111004
