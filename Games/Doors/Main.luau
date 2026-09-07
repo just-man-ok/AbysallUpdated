@@ -64,7 +64,7 @@ Abysall.Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.lua
 Abysall.Analytics = loadstring(game:HttpGet(BaseUrl .. "Components/Analytics.luau"))()
 
 local CurrentGame = GameList[game.GameId]
-if CurrentGame == "Doors" then end
+if CurrentGame ~= "Doors" then elseif CurrentGame == "Doors" then end
 
 local LoadStart = tick()
 Abysall.SavePath = "Doors/Game"
