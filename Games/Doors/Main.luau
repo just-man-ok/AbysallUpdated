@@ -11,6 +11,8 @@ local GameList = {
 
 local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
 
+queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau'))()")
+
 getgenv().Abysall = {
     Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
     ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
