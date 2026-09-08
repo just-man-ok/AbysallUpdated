@@ -9,7 +9,7 @@ local GameList = {
   [2440500124] = "Doors"
 }
 
-queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
+--queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
 
 local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
 getgenv().Abysall = {
