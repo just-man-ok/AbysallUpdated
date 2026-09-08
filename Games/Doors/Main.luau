@@ -1,71 +1,3 @@
-if Abysall then
-    return 
-end
-getgenv().Abysall = {
-    Legit = true
-}
-
-local GameList = {
-  [2440500124] = "Doors"
-}
-
-local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
-
-queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau'))()")
-
-getgenv().Abysall = {
-    Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
-    ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
-    Legit = true,
-}
-
-local function CloneReference(Object)
-    if Abysall and Abysall.Environment.cloneref then
-        return Abysall.Environment.cloneref(Object)
-    else
-        return Object
-    end
-end
-
-local Services = setmetatable({}, {
-    __index = function(self, Name)
-        return CloneReference(game:GetService(Name))
-    end
-})
-
-if Abysall.Environment.writefile and Abysall.Environment.readfile then
-    if not Abysall.Environment.isfile("Abysall/UserData.json") then
-        local Data = {
-            TotalExecutions = 0,
-            UILibrary = "Obsidian"
-        }
-        Abysall.Environment.writefile("Abysall/UserData.json", Services.HttpService:JSONEncode(Data))
-    end
-
-    local UserData = Abysall.Environment.readfile("Abysall/UserData.json")
-    local Decoded = Services.HttpService:JSONDecode(UserData)
-    if not Decoded.TotalExecutions then
-        Decoded.TotalExecutions = 0    
-    end
-
-    Decoded.TotalExecutions = Decoded.TotalExecutions + 1
-
-    if not Decoded.UILibrary then
-        Decoded.UILibrary = "Obsidian"
-    end
-
-    Abysall.TotalExecutions = Decoded.TotalExecutions
-    Abysall.UILibrary = Decoded.UILibrary
-
-    Abysall.Environment.writefile("Abysall/UserData.json", Services.HttpService:JSONEncode(Decoded))
-end
-
-Abysall.Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.luau"))()
-Abysall.Analytics = loadstring(game:HttpGet(BaseUrl .. "Components/Analytics.luau"))()
-
-local CurrentGame = GameList[game.GameId]
-if CurrentGame ~= "Doors" then elseif CurrentGame == "Doors" then end
-
 local LoadStart = tick()
 Abysall.SavePath = "Doors/Game"
 
@@ -108,6 +40,7 @@ local Objects = {
 	Chests = {},
 	Currency = {},
 	Ladders = {},
+    Coolers = {},
 	Obstructions = {},
 	EventTriggers = {},
 	JumpscareModules = {},
@@ -198,19 +131,7 @@ local Entities = {
 	["SallyMoving"] = {
 		Alias = "Sally",
 		NotifyMessage = { Title = "Entity 'Sally' has spawned.", Body = "Drop an item for her." }
-	},
-    ["BashMoving"] = {
-		Alias = "Bash",
-		NotifyMessage = { Title = "Entity 'Bash' has spawned.", Body = "Find a hiding spot." }
-	},
-    ["Scribbles"] = {
-		Alias = "Scribbles",
-		NotifyMessage = { Title = "Entity 'Scribbles' has spawned.", Body = "Find a hiding spot." }
-	},
-    ["Drones"] = {
-		Alias = "Drone",
-		NotifyMessage = { Title = "Entity 'Drone' has spawned.", Body = "Avoid touching him." }
-	},
+	}
 }
 
 local EntityIcons = {
@@ -229,10 +150,7 @@ local EntityIcons = {
 	["GlitchAmbush"]    = "rbxassetid://88369678433359",
 	["SallyMoving"]     = "rbxassetid://10840888070",
 	["MonumentEntity"]  = "rbxassetid://88933556873017",
-	["Groundskeeper"]   = "rbxassetid://114991380115557",
-	["BashMoving"]      = "rbxassetid://85415324315809",
-	["Scribbles"]       = "rbxassetid://102966315280987",
-	["Drones"]          = "rbxassetid://135237252589015",
+	["Groundskeeper"]   = "rbxassetid://114991380115557"
 }
 
 local ItemNames = {
@@ -292,9 +210,7 @@ local ItemNames = {
 	["AloeVera"]          = "Aloe Vera",
 	["Donut"]             = "Donut",
 	["Lotus"]             = "Lotus",
-	["BoxingGloves"]      = "Boxing Gloves",
-	["Pizza"]             = "Pizza",
-	["HoneyPot"]          = "Honey Pot"
+	["BoxingGloves"]      = "Boxing Gloves"
 }
 
 local CutsceneNames = {
@@ -844,8 +760,6 @@ local EntityDistances = {
 	["GlitchAmbush"]  = 175,
 	["BackdoorRush"]  = 85,
 	["CustomEntity"]  = 85,
-	["BashMoving"]    = 200,
-    ["Scribbles"]     = 200
 }
 
 Functions.GetNearestEntity = function(CheckDisabled, List, UseRaycasting)
@@ -1099,7 +1013,7 @@ Functions.GetRandomCode = function()
 end
 
 local Window = Library:CreateWindow({
-	Title = "Abysall Hub Fork",
+	Title = "Abysall Hub",
 	Footer = "dsc.gg/abysallhub",
 	NotifySide = "Right",
 	ShowCustomCursor = false,
@@ -1789,7 +1703,7 @@ Groupboxes.Visuals_EntitySettings = Groupboxes.Visuals_RightTab:AddTab("Settings
 
 Groupboxes.Visuals_Entities:AddDropdown("EntityList", {
 	Text = "Entity List",
-	Values = { "Rush","Ambush","Eyes","Halt","Blitz","Lookman","Gloombat Swarm","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Monument","AR0xMBUSH","RNIUSHCG==","Bash","Scribbles","Drone" },
+	Values = { "Rush","Ambush","Eyes","Halt","Blitz","Lookman","Gloombat Swarm","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Monument","AR0xMBUSH","RNIUSHCG==" },
 	Multi = true, AllowNull = true
 })
 Groupboxes.Visuals_Entities:AddToggle("NotifyEntities",    { Text = "Notify Entities",    Default = false, Tooltip = "Sends a notification when an entity spawns." })
@@ -1915,10 +1829,11 @@ Groupboxes.Visuals_ESP_Toggles:AddToggle("ChestESPToggle",      { Text = "Chests
 Groupboxes.Visuals_ESP_Toggles:AddToggle("ItemESPToggle",       { Text = "Items",        Default = false, Tooltip = "Highlights all collectable items/consumables." })
 Groupboxes.Visuals_ESP_Toggles:AddToggle("CurrencyESPToggle",   { Text = "Currency",     Default = false, Tooltip = "Highlights all currency that spawns." })
 Groupboxes.Visuals_ESP_Toggles:AddToggle("LadderESPToggle",     { Text = "Ladders",      Default = false, Tooltip = "Highlights ladders that can be used to disable the anticheat." })
+Groupboxes.Visuals_ESP_Toggles:AddToggle("CoolerESPToggle",     { Text = "Coolers",      Default = false, Tooltip = "Highlights all coolers that spawns." })
 Groupboxes.Visuals_ESP_Toggles:AddDivider()
 Groupboxes.Visuals_ESP_Toggles:AddDropdown("EntityESPOptions",     { 
 	Text = "Entity List",
-	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Snare","Giggle","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==","Bash","Scribbles","Drone" },
+	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Snare","Giggle","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==" },
 	Multi = true,
 	AllowNull = true
 })
@@ -1931,15 +1846,14 @@ Toggles.ChestESPToggle:AddColorPicker("ChestESPColor",         { Text = "Chests"
 Toggles.ItemESPToggle:AddColorPicker("ItemESPColor",           { Text = "Items",        Default = Color3.fromRGB(170, 0, 255),   Transparency = 0 })
 Toggles.CurrencyESPToggle:AddColorPicker("CurrencyESPColor",   { Text = "Currency",     Default = Color3.fromRGB(255, 255, 0),   Transparency = 0 })
 Toggles.LadderESPToggle:AddColorPicker("LadderESPColor",       { Text = "Ladders",      Default = Color3.fromRGB(255, 255, 255), Transparency = 0 })
+Toggles.CoolerESPToggle:AddColorPicker("CoolerESPColor",       { Text = "Coolers",      Default = Color3.fromRGB(66, 170, 255),     Transparency = 0 })
 Toggles.EntityESPToggle:AddColorPicker("EntityESPColor",       { Text = "Entities",     Default = Color3.fromRGB(255, 0, 0),     Transparency = 0 })
 
 local HidingSpotLabels = {
 	Wardrobe = "Closet", ["Backdoor_Wardrobe"] = "Closet", Toolshed = "Closet",
 	RetroWardrobe = "Closet", ["Wardrobe-FOOLS26"] = "Closet",
 	Locker_Large = "Locker", Rooms_Locker = "Locker", Rooms_Locker_Fridge = "Locker",
-	Bed = "Bed", Double_Bed = "Double Bed", CircularVent = "Vent", Dumpster = "Dumpster", HidingSpot1 = "Closet", 
-	HidingSpot2 = "Closet", HidingSpot3 = "Closet", HidingSpot4 = "Closet", HidingSpot5 = "Closet", HidingSpot6 = "Closet", 
-	HidingSpot7 = "Closet", HidingSpot8 = "Closet", HidingSpot9 = "Closet", HidingSpot10 = "Closet"
+	Bed = "Bed", Double_Bed = "Double Bed", CircularVent = "Vent", Dumpster = "Dumpster"
 }
 local ChestLabels = {
 	ChestBox = true, ChestBoxLocked = true, Toolbox = true, Toolbox_Locked = true,
@@ -1950,11 +1864,11 @@ local EntityESPLabels = {
 	Snare = "Snare", GrumbleRig = "Grumble",
 	Drakobloxxer = "Drakobloxxer", Hole = "Mandrake Hole", Groundskeeper = "Groundskeeper",
 	LiveEntityBramble = "Bramble", Figure = "Figure", FigureRig = "Figure", FigureRagdoll = "Figure",
-	FakeDoor = "Dupe", DoorFake = "Dupe", BashMoving = "Bash", Scribbles = "Scribbles", Drones = "Drone"
+	FakeDoor = "Dupe", DoorFake = "Dupe"
 }
 
 local NodeEntities = {
-	Rush = true, Ambush = true, Eyes = true, Blitz = true, Lookman = true, ["A-60"] = true, ["A-120"] = true, Sally = true, ["Jeff The Killer"] = true, Monument = true, ["AR0xMBUSH"] = true, ["RNIUSHCG=="] = true, ["BashMoving"] = true, ["Scribbles"] = true
+	Rush = true, Ambush = true, Eyes = true, Blitz = true, Lookman = true, ["A-60"] = true, ["A-120"] = true, Sally = true, ["Jeff The Killer"] = true, Monument = true, ["AR0xMBUSH"] = true, ["RNIUSHCG=="] = true
 }
 
 Toggles.DoorESPToggle:OnChanged(function(Value)
@@ -2099,6 +2013,16 @@ Toggles.LadderESPToggle:OnChanged(function(Value)
 end)
 Options.LadderESPColor:OnChanged(function(Value)
 	for _, Object in Objects.Ladders do Abysall.ESPLibrary:UpdateObjectColor(Object, Value) end
+end)
+
+Toggles.CoolerESPToggle:OnChanged(function(Value)
+	for _, Object in Objects.Coolers do
+		if Value then Functions.AddESP({ Object = Object, Text = "Water Cooler", Color = Options.CoolerESPColor.Value }, true)
+		else Functions.RemoveESP(Object) end
+	end
+end)
+Options.CoolerESPColor:OnChanged(function(Value)
+	for _, Object in Objects.Coolers do Abysall.ESPLibrary:UpdateObjectColor(Object, Value) end
 end)
 
 Groupboxes.Visuals_ESP_Settings:AddToggle("ESPRainbow",     { Text = "Rainbow Effect", Default = false, Tooltip = "Makes the esp objects change colour like a rainbow." })
@@ -3480,6 +3404,9 @@ Functions.HandleObject = function(Object)
 	elseif Name == "Ladder" then
 		if Toggles.LadderESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Ladder", Color = Options.LadderESPColor.Value }, true) end
 		table.insert(Objects.Ladders, Object)
+    elseif Name == "ArchivesWaterCooler" then
+		if Toggles.CoolerESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Water Cooler", Color = Options.CoolerESPColor.Value }, true) end
+		table.insert(Objects.Coolers, Object)
 	elseif Name == "Door" and Object.Parent and tonumber(Object.Parent.Name) then
 		local DoorParts = {}
 		for _, Child in Object:GetChildren() do
@@ -4075,9 +4002,7 @@ local AllowedInstances = {
 	ChestBox=true, ChestBoxLocked=true, Chest_Vine=true, Locker_Small_Locked=true, Toolbox=true,
 	Toolbox_Locked=true, Wardrobe=true, ["Wardrobe-FOOLS26"]=true, Toolshed=true, Toolshed_Small=true,
 	Bed=true, MinesAnchor=true, Double_Bed=true, RetroWardrobe=true, Backdoor_Wardrobe=true,
-	Rooms_Locker=true, Rooms_Locker_Fridge=true, Locker_Large=true, HidingSpot1=true, 
-	HidingSpot2=true, HidingSpot3=true, HidingSpot4=true, HidingSpot5=true, 
-	HidingSpot6=true, HidingSpot7=true, HidingSpot8=true, HidingSpot9=true, HidingSpot10=true, FigureRig=true, FigureRagdoll=true,
+	Rooms_Locker=true, Rooms_Locker_Fridge=true, Locker_Large=true, FigureRig=true, FigureRagdoll=true,
 	TimerLever=true, Lever=true, Seek_Arm=true, ChandelierObstruction=true, ScaryWall=true, Ladder=true,
 	CircularVent=true, Dumpster=true, SquareGrate=true, TriggerEventCollision=true, GrumbleRig=true,
 	GiggleCeiling=true, MinesGateButton=true, ElectricalKeyObtain=true, LibraryHintPaper=true,
@@ -4088,7 +4013,7 @@ local AllowedInstances = {
 	MovingDoor=true, StardustPickup=true, Hole=true, Groundskeeper=true, MandrakeLive=true,
 	GardenGateButton=true, LotusPetalPickup=true, VineGuillotine=true, LiveEntityBramble=true,
 	RiftSpawn=true, ElevatorBreaker=true, RunnerNodes=true, PathLights=true, DuckBoard=true,
-	Padlock=true, EyestalkEndCutscene=true, MinecartRig=true, SeekMovingNewClone=true
+	Padlock=true, EyestalkEndCutscene=true, MinecartRig=true, SeekMovingNewClone=true, ArchivesWaterCooler=true
 }
 
 Functions.QueueObject = function(Object)
