@@ -9,7 +9,7 @@ local GameList = {
   [2440500124] = "Doors"
 }
 
---queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
+queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
 
 local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
 getgenv().Abysall = {
@@ -278,7 +278,9 @@ local ItemNames = {
 	["AloeVera"]          = "Aloe Vera",
 	["Donut"]             = "Donut",
 	["Lotus"]             = "Lotus",
-	["BoxingGloves"]      = "Boxing Gloves"
+	["BoxingGloves"]      = "Boxing Gloves",
+    ["Pizza"]             = "Pizza"
+    ["HoneyPot"]          = "Honey Pot"
 }
 
 local CutsceneNames = {
@@ -1771,7 +1773,7 @@ Groupboxes.Visuals_EntitySettings = Groupboxes.Visuals_RightTab:AddTab("Settings
 
 Groupboxes.Visuals_Entities:AddDropdown("EntityList", {
 	Text = "Entity List",
-	Values = { "Rush","Ambush","Eyes","Halt","Blitz","Lookman","Gloombat Swarm","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Monument","AR0xMBUSH","RNIUSHCG==" },
+	Values = { "Rush","Ambush","Eyes","Halt","Blitz","Lookman","Gloombat Swarm","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Monument","AR0xMBUSH","RNIUSHCG==","BashMoving","Scribbles","Drone" },
 	Multi = true, AllowNull = true
 })
 Groupboxes.Visuals_Entities:AddToggle("NotifyEntities",    { Text = "Notify Entities",    Default = false, Tooltip = "Sends a notification when an entity spawns." })
@@ -1901,7 +1903,7 @@ Groupboxes.Visuals_ESP_Toggles:AddToggle("CoolerESPToggle",     { Text = "Cooler
 Groupboxes.Visuals_ESP_Toggles:AddDivider()
 Groupboxes.Visuals_ESP_Toggles:AddDropdown("EntityESPOptions",     { 
 	Text = "Entity List",
-	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Snare","Giggle","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==" },
+	Values = { "Rush","Ambush","Eyes","Dupe","Figure","Blitz","Lookman","Snare","Giggle","Gloombat Eggs","Grumble","A-60","A-120","Sally","Jeff the Killer","Groundskeeper","Mandrake Hole","Monument","Bramble","AR0xMBUSH","RNIUSHCG==","BashMoving","Scribbles","Drone" },
 	Multi = true,
 	AllowNull = true
 })
@@ -1936,7 +1938,7 @@ local EntityESPLabels = {
 }
 
 local NodeEntities = {
-	Rush = true, Ambush = true, Eyes = true, Blitz = true, Lookman = true, ["A-60"] = true, ["A-120"] = true, Sally = true, ["Jeff The Killer"] = true, Monument = true, ["AR0xMBUSH"] = true, ["RNIUSHCG=="] = true
+	Rush = true, Ambush = true, Eyes = true, Blitz = true, Lookman = true, ["A-60"] = true, ["A-120"] = true, Sally = true, ["Jeff The Killer"] = true, Monument = true, ["AR0xMBUSH"] = true, ["RNIUSHCG=="] = true, ["BashMoving"] = true, ["Scribbles"] = true
 }
 
 Toggles.DoorESPToggle:OnChanged(function(Value)
