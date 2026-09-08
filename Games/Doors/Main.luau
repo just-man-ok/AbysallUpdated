@@ -1,6 +1,7 @@
 --if Abysall then
     --return 
 --end
+print("hi")
 getgenv().Abysall = {
     Legit = true
 }
