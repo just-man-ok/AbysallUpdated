@@ -1,7 +1,6 @@
 --if Abysall then
     --return 
 --end
-print("hi")
 getgenv().Abysall = {
     Legit = true
 }
@@ -9,8 +8,6 @@ getgenv().Abysall = {
 local GameList = {
   [2440500124] = "Doors"
 }
-
-queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
 
 local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
 getgenv().Abysall = {
@@ -280,7 +277,7 @@ local ItemNames = {
 	["Donut"]             = "Donut",
 	["Lotus"]             = "Lotus",
 	["BoxingGloves"]      = "Boxing Gloves",
-    ["Pizza"]             = "Pizza"
+    ["Pizza"]             = "Pizza",
     ["HoneyPot"]          = "Honey Pot"
 }
 
