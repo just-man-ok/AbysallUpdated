@@ -1,6 +1,6 @@
-if Abysall then
-    return 
-end
+--if Abysall then
+    --return 
+--end
 getgenv().Abysall = {
     Legit = true
 }
