@@ -9,12 +9,14 @@ local GameList = {
   [2440500124] = "Doors"
 }
 
+queue_on_teleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/Games/Doors/Main.luau"))()")
+
 local BaseUrl = "https://raw.githubusercontent.com/just-man-ok/AbysallUpdated/refs/heads/main/"
 getgenv().Abysall = {
     Environment = loadstring(game:HttpGet(BaseUrl .. "Components/Environment.luau"))(),
     ESPLibrary = loadstring(game:HttpGet(BaseUrl .. "Components/ESP.luau"))(),
 
-    Legit = true, -- pog
+    Legit = true,
 }
 
 local function CloneReference(Object)
@@ -62,7 +64,7 @@ Abysall.Interface = loadstring(game:HttpGet(BaseUrl .. "Components/Interface.lua
 Abysall.Analytics = loadstring(game:HttpGet(BaseUrl .. "Components/Analytics.luau"))()
 
 local CurrentGame = GameList[game.GameId]
-if CurrentGame == "Doors" then end
+if CurrentGame ~= "Doors" then end
 
 local LoadStart = tick()
 Abysall.SavePath = "Doors/Game"
