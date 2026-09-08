@@ -1792,6 +1792,9 @@ Groupboxes.Visuals_Entities:AddDropdown("NotifyItemList", {
 Groupboxes.Visuals_Entities:AddToggle("NotifyItemsToggle",    { Text = "Notify Items",    Default = false, Tooltip = "Sends a notification when an item spawns." })
 Groupboxes.Visuals_Entities:AddToggle("NotifyItemsShowDistance",    { Text = "Show Distance",    Default = false, Tooltip = "Shows how far away the item is in the notification." })
 Groupboxes.Visuals_Entities:AddDivider()
+Groupboxes.Visuals_Entities:AddToggle("NotifyObjectsToogle",    { Text = "Notify Objects",    Default = false, Tooltip = "Sends a notification when an object spawns (example: water cooler from Archives)" })
+Groupboxes.Visuals_Entities:AddToggle("NotifyObjectsShowDistance",    { Text = "Show Distance",    Default = false, Tooltip = "Shows how far away the object is in the notification." })
+Groupboxes.Visuals_Entities:AddDivider()
 Groupboxes.Visuals_Entities:AddToggle("NotifyLibraryCode", { Text = "Notify Library Code", Default = false, Tooltip = "Automatically solves the code for the library padlock." })
 Groupboxes.Visuals_Entities:AddToggle("NotifyOxygen",      { Text = "Notify Oxygen Level", Default = false, Tooltip = "Shows how much oxygen you have remaining." })
 Groupboxes.Visuals_Entities:AddToggle("NotifyHasteTime",   { Text = "Notify Haste Time",   Default = false, Tooltip = "Shows how much time you have remaining before 'Haste' spawns." })
@@ -3475,6 +3478,13 @@ Functions.HandleObject = function(Object)
     elseif Name == "ArchivesWaterCooler" then
 		if Toggles.CoolerESPToggle.Value then Functions.AddESP({ Object = Object, Text = "Water Cooler", Color = Options.CoolerESPColor.Value }, true) end
 		table.insert(Objects.Coolers, Object)
+        if Toggles.NotifyObjectsToggle.Value and Object.Parent.Name ~= "Drops" then
+			if Toggles.NotifyObjectsShowDistance.Value then
+				Functions.Notify({ Title = "Object '"Water Cooler"' has spawned.", Body = "It is '" .. math.round(LocalPlayer:DistanceFromCharacter(Object.PrimaryPart.Position)) .. "' studs away from you." })
+			else
+				Functions.Notify({ Title = "Item '" .. ItemNames[Name] .. "' has spawned."})
+			end
+		end
 	elseif Name == "Door" and Object.Parent and tonumber(Object.Parent.Name) then
 		local DoorParts = {}
 		for _, Child in Object:GetChildren() do
